@@ -28,36 +28,41 @@ function main() {
         type: `list`,
         message: `What would you like to do?`,
         choices: [
-            `F1`,
-            `F2`,
-            `F3`,
-            `F4`,
-            `F5`,
+            `Create Department`,
+            `Create Role`,
+            `Create Employee`,
+            `View Departments`,
+            `View Roles`,
+            `View Employees`,
             `EXIT`
         ]
     })
     .then( (answer) => {
         switch (answer.funcChoice) {
-            case `F1`:
-                F1();
+            case `Create Department`:
+                create(`department`);
             break;
 
-            case `F2`:
-                F2();
+            case `Create Role`:
+                create(`role`);
             break;
 
-            case `F3`:
-                F3();
+            case `Create Employee`:
+                create(`employee`);
             break;
 
-            case `F4`:
-                F4();
+            case `View Departments`:
+                view(`departments`);
             break;
 
-            case `F5`:
-                F5();
+            case `View Roles`:
+                view(`roles`);
             break;
 
+            case `View Employees`:
+                view(`employees`);
+            break;
+            
             case `EXIT`:
                 console.log(`[i] closing db connection`);
                 connection.end();
@@ -67,26 +72,38 @@ function main() {
     });
 };
 
-function F1() {
-    console.log(`F1()`);
+function create(nounArg) {
+    console.log(`create(${nounArg})`);
+    switch (nounArg) {
+        case "department":
+        break;
+
+        case "role":
+        break;
+
+        case "employee":
+        break;
+    }
     main();
 };
-function F2() {
-    console.log(`F2()`);
+
+function view(nounArg) {
+    console.log(`view(${nounArg})`);
+    switch (nounArg) {
+        case "departments":
+        break;
+
+        case "roles":
+        break;
+
+        case "employees":
+        break;
+    }
     main();
 };
-function F3() {
-    console.log(`F3()`);
-    main();
-};
-function F4() {
-    console.log(`F4()`);
-    main();
-};
-function F5() {
-    console.log(`F5()`);
-    main();
-};
+
+
+
 
 // const verbArray = [
 //     {
