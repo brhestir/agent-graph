@@ -1,5 +1,5 @@
 {
-  "name": "employee-tracker",
+  "name": "agent-graph",
   "version": "1.0.0",
   "description": "Agent Graph System",
   "main": "server.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/brhestir/employee-tracker.git"
+    "url": "git+https://github.com/brhestir/agent-graph.git"
   },
   "author": "Brian Hestir",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/brhestir/employee-tracker/issues"
+    "url": "https://github.com/brhestir/agent-graph/issues"
   },
-  "homepage": "https://github.com/brhestir/employee-tracker#readme",
+  "homepage": "https://github.com/brhestir/agent-graph#readme",
   "dependencies": {
     "inquirer": "^7.3.3",
     "mysql": "^2.18.1"
