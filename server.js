@@ -62,7 +62,7 @@ function main() {
             case `View Employees`:
                 view(`employees`);
             break;
-            
+
             case `EXIT`:
                 console.log(`[i] closing db connection`);
                 connection.end();
@@ -75,28 +75,181 @@ function main() {
 function create(nounArg) {
     console.log(`create(${nounArg})`);
     switch (nounArg) {
-        case "department":
+        case `department`:
+            inquirer.prompt([
+                {
+                    name: `deptName`,
+                    type: `input`,
+                    message: `Enter department name: `
+                },
+            ])
+            .then( (answers) => {
+                console.log(`\n${answers.deptName}\n`);
+                var query = `INSERT INTO department_table (name) VALUES ("${answers.deptName}");`;
+                connection.query(
+                    query,
+                    function(err, res) {
+                        if(err) {
+                            console.log(`\n`);
+                            console.log(`${err}`);
+                            throw err;
+                        } else {
+                            console.log(`\n`);
+                            console.table(res);
+                        }  
+                    }
+                );
+                main();     // this is undesired, consider returning from then-chain and loop
+            });
         break;
 
-        case "role":
+        case `role`:
+            inquirer.prompt([
+                {
+                    name: `roleTitle`,
+                    type: `input`,
+                    message: `Enter role title: `
+                },
+                {
+                    name: `roleSalary`,
+                    type: `input`,
+                    message: `Enter role salary: `
+                },
+                {
+                    name: `roleDepartment_id`,
+                    type: `input`,
+                    message: `Enter role department_id: `
+                },
+            ])
+            .then( (answers) => {
+                console.log(`\n${answers.roleTitle}, ${answers.roleSalary}, ${answers.roleDepartment_id}\n`);
+                var query = `INSERT INTO role_table (title, salary, department_id) VALUES ("${answers.roleTitle}", ${answers.roleSalary}, ${answers.roleDepartment_id});`;
+                connection.query(
+                    query,
+                    // {
+                    //     roleName: answers.roleName, 
+                    //     roleSalary: answers.roleSalary,
+                    //     roleDeptId: answers.roleDeptId
+                    // },
+                    function(err, res) {
+                        if(err) {
+                            console.log(`\n`);
+                            console.log(`${err}`);
+                            throw err;
+                        } else {
+                            console.log(`\n`);
+                            console.table(res);
+                        }  
+                    }
+                );
+                main();     // this is undesired, consider returning from then-chain and loop
+            });
         break;
 
-        case "employee":
+        case `employee`:
+            inquirer.prompt([
+                {
+                    name: `first_name`,
+                    type: `input`,
+                    message: `Enter employee first name: `
+                },
+                {
+                    name: `last_name`,
+                    type: `input`,
+                    message: `Enter employee last name: `
+                },
+                {
+                    name: `role_id`,
+                    type: `input`,
+                    message: `Enter employee role id: `
+                },
+                {
+                    name: `manager_id`,
+                    type: `input`,
+                    message: `Enter employee manager id: `
+                },
+            ])
+            .then( (answers) => {
+                console.log(`\n${answers.first_name}, ${answers.last_name}, ${answers.role_id}, ${answers.manager_id}\n`);
+                var query = `INSERT INTO employee_table (first_name, last_name, role_id, manager_id) VALUES ("${answers.first_name}", "${answers.last_name}", ${answers.role_id}, ${answers.manager_id});`;
+                connection.query(
+                    query,
+                    // {
+                    //     employeeFirstName: answers.employeeFirstName, 
+                    //     employeeLastName: answers.employeeLastName,
+                    //     employeeRoleId: answers.employeeRoleId,
+                    //     employeeManagerId: answers.employeeManagerId
+                    // },
+                    function(err, res) {
+                        if(err) {
+                            console.log(`\n`);
+                            console.log(`${err}`);
+                            throw err;
+                        } else {
+                            console.log(`\n`);
+                            console.table(res);
+                        }  
+                    }
+                );
+                main();     // this is undesired, consider returning from then-chain and loop
+            });
         break;
     }
-    main();
+    
 };
 
 function view(nounArg) {
     console.log(`view(${nounArg})`);
     switch (nounArg) {
         case "departments":
+            var query = `SELECT * FROM department_table;`;
+            connection.query(
+                query,
+                function(err, res) {
+                    if(err) {
+                        console.log(`\n`);
+                        console.log(`${err}`);
+                        throw err;
+                    } else {
+                        console.log(`\n`);
+                        console.table(res);
+                    }
+                }
+            );
         break;
 
         case "roles":
+            var query = `SELECT * FROM role_table;`;
+            connection.query(
+                query,
+                function(err, res) {
+                    if(err) {
+                        console.log(`\n`);
+                        console.log(`${err}`);
+                        throw err;
+                    } else {
+                        console.log(`\n`);
+                        console.table(res);
+                    }
+                }
+            );
         break;
 
         case "employees":
+            var query = `SELECT * FROM employee_table;`;
+            connection.query(
+                query,
+                function(err, res) {
+                    if(err) {
+                        console.log(`\n`);
+                        console.log(`${err}`);
+                        throw err;
+                    } else {
+                        console.log(`\n`);
+                        console.table(res);
+                    }
+                }
+            );
         break;
     }
     main();
