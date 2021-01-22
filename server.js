@@ -3,12 +3,13 @@
 // includes
 const inquirer = require(`inquirer`);
 const mysql = require(`mysql`);
+const agentGraphAASCI = require(`./assets/aasci`);
 
 var connection = mysql.createConnection({
     host: `localhost`,
     port: 3306,
     user: `root`,
-    password: `${process.argv[2]}`,
+    password: `toor!TOOR!`,
     database: `agentGraph_db`
 });
 
@@ -23,6 +24,8 @@ connection.connect(function(err) {
 })
 
 function main() {
+    agentGraphAASCI();
+
     inquirer.prompt({
         name: `funcChoice`,
         type: `list`,
